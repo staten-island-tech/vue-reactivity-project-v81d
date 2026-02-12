@@ -61,16 +61,13 @@ const isDark = ref(false);
 
 watch(isDark, async (nowDark, _) => {
   document.documentElement.classList.toggle("dark", nowDark);
+  localStorage.setItem("darkTheme", nowDark ? "1" : "0");
 });
 
 // Apply stored theme to document
 try {
-  const stored: string | null = localStorage.getItem("themeMode");
-  if (
-    stored
-      ? stored === "dark"
-      : matchMedia("(prefers-color-scheme: dark)").matches
-  ) {
+  const stored: string | null = localStorage.getItem("darkTheme");
+  if (Number(stored) == 1) {
     isDark.value = true;
   }
 } catch (_) {}
