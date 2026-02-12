@@ -8,10 +8,14 @@
         :placeholder="inputPlaceholder"
         required
         v-model="text"
+        @keydown.meta.enter="submit"
+        @keydown.ctrl.enter="submit"
       ></textarea>
       <p class="text-muted-foreground text-sm">{{ inputDescription }}</p>
     </div>
-    <button type="submit" class="btn" :disabled="!text">{{ buttonLabel }}</button>
+    <button type="submit" class="btn" :disabled="!text">
+      {{ buttonLabel }}
+    </button>
   </form>
 </template>
 

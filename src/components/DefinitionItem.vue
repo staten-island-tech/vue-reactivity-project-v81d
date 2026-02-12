@@ -17,7 +17,7 @@
         </p>
       </template>
     </div>
-    <button class="btn-sm-outline">See More</button>
+    <a class="btn-sm-outline" :href="`/definition/${word}`"> See More </a>
   </article>
 </template>
 

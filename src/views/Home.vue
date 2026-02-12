@@ -10,6 +10,7 @@
       title="Dictionize"
       subtitle="Input any text to see definitions for every word."
     ></Header>
+
     <div class="flex flex-col md:flex-row gap-8 w-full h-full">
       <!-- The form card -->
       <div class="card flex-1">
