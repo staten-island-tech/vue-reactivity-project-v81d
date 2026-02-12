@@ -6,16 +6,10 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  subtitle: {
-    type: String,
-    required: true,
-  },
-});
+defineProps<{
+  title: string;
+  subtitle: string;
+}>();
 </script>
 
 <style scoped></style>

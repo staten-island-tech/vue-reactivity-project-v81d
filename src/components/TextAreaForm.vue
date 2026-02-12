@@ -6,11 +6,12 @@
         id="text-input"
         class="min-h-36"
         :placeholder="inputPlaceholder"
+        required
         v-model="text"
       ></textarea>
       <p class="text-muted-foreground text-sm">{{ inputDescription }}</p>
     </div>
-    <button type="submit" class="btn">{{ buttonLabel }}</button>
+    <button type="submit" class="btn" :disabled="!text">{{ buttonLabel }}</button>
   </form>
 </template>
 

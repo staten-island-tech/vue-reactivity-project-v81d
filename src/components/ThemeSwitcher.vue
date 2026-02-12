@@ -4,7 +4,7 @@
     aria-label="Toggle color scheme"
     data-tooltip="Toggle color scheme"
     :data-side="tooltipSide"
-    class="btn-icon-outline size-8"
+    class="btn-icon-outline size-8 z-9999"
     @click="toggleDark"
   >
     <span class="hidden dark:block"
