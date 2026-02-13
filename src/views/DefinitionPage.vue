@@ -5,7 +5,10 @@
   ></ThemeSwitcher>
 
   <div class="flex flex-col gap-8 w-full h-full p-12">
-    <Header :title="`Dictionary Entries for &quot;${word}&quot;`"></Header>
+    <div class="flex flex-wrap items-center gap-8 w-full">
+      <HomeButton></HomeButton>
+      <Header :title="`Dictionary Entries for &quot;${word}&quot;`"></Header>
+    </div>
     <DictionaryEntryCard
       v-for="entry in entries"
       :entry="entry"
@@ -23,6 +26,7 @@ import {
 } from "@/config/globals";
 
 import ThemeSwitcher from "@/components/ThemeSwitcher.vue";
+import HomeButton from "@/components/HomeButton.vue";
 import Header from "@/components/Header.vue";
 import DictionaryEntryCard from "@/components/DictionaryEntryCard.vue";
 
