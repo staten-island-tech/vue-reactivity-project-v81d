@@ -6,9 +6,10 @@
 
   <div class="flex flex-col gap-8 w-full h-full p-12">
     <Header :title="`Dictionary Entries for &quot;${word}&quot;`"></Header>
-    <template v-for="entry in entries">
-      <DictionaryEntryCard :entry="entry"></DictionaryEntryCard>
-    </template>
+    <DictionaryEntryCard
+      v-for="entry in entries"
+      :entry="entry"
+    ></DictionaryEntryCard>
   </div>
 </template>
 
