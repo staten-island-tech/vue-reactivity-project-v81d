@@ -37,7 +37,7 @@
             Lo and behold! Below are the definitions of each valid word.
           </p>
         </header>
-        <section class="overflow-scroll flex flex-col gap-4">
+        <section class="overflow-y-hidden overflow-y-scroll flex flex-col gap-4">
           <DefinitionItem
             :word="definition.word"
             :partOfSpeech="definition.meanings?.[0]?.partOfSpeech"
