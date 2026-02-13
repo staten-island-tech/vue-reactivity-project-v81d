@@ -57,7 +57,7 @@ defineProps({
   tooltipSide: String,
 });
 
-const isDark = ref(false);
+const isDark = ref<boolean>(false);
 
 watch(isDark, async (nowDark, _) => {
   document.documentElement.classList.toggle("dark", nowDark);

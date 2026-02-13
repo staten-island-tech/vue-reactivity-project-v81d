@@ -30,7 +30,7 @@ const props = defineProps<{
   buttonLabel: string;
 }>();
 
-const text = ref("");
+const text = ref<string>("");
 
 function submit() {
   props.action(text.value);

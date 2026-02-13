@@ -1,7 +1,7 @@
 <template>
   <ThemeSwitcher
     :tooltipSide="'left'"
-    class="fixed top-12 right-12"
+    class="fixed md:top-12 right-12 bottom-12"
   ></ThemeSwitcher>
 
   <!-- This `div` is the "body" or container for everything else -->
@@ -56,35 +56,29 @@
 <script setup lang="ts">
 import { ref, type Ref } from "vue";
 
+import {
+  DICTIONARY_API_ENDPOINT,
+  type DictionaryEntry,
+} from "@/config/globals";
+
 import ThemeSwitcher from "@/components/ThemeSwitcher.vue";
 import Header from "@/components/Header.vue";
 import TextAreaForm from "@/components/TextAreaForm.vue";
 import DefinitionItem from "@/components/DefinitionItem.vue";
 
-const DICTIONARY_API_ENDPOINT: string =
-  "https://api.dictionaryapi.dev/api/v2/entries/en/";
+// @ts-expect-error
+const segmenter = new Intl.Segmenter("en", { granularity: "word" });
 
-type DictionaryEntry = {
-  word: string;
-  meanings?: Meaning[];
-};
-
-type Meaning = {
-  partOfSpeech: string;
-  definitions: Definition[];
-};
-
-type Definition = {
-  definition: string;
-  example?: string;
-};
-
-const definitions: Ref<DictionaryEntry[]> = ref([]);
+const definitions = ref<DictionaryEntry[]>([]);
 
 async function define(text: string) {
   definitions.value = [];
 
-  const words: string[] = text.trim().split(/\s+/); // split by whitespaces
+  // Split into words
+  const segments = [...segmenter.segment(text)];
+  const words: string[] = segments
+    .filter((s) => s.isWordLike)
+    .map((s) => s.segment);
 
   for (let i = 0; i < words.length; i++) {
     const word = words[i];
@@ -107,8 +101,4 @@ async function define(text: string) {
 }
 </script>
 
-<style scoped>
-* {
-  font-family: "Work Sans";
-}
-</style>
+<style scoped></style>

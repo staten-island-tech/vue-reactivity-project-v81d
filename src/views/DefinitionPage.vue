@@ -1,41 +1,50 @@
 <template>
   <ThemeSwitcher
     :tooltipSide="'left'"
-    class="fixed top-12 right-12"
+    class="fixed md:top-12 right-12 bottom-12"
   ></ThemeSwitcher>
 
   <div class="flex flex-col gap-8 w-full h-full p-12">
-    <Header
-      :title="`Definitions of &quot;${word}&quot;`"
-      :subtitle="`Below is the dictionary entry for the word &quot;${word}.&quot;`"
-    ></Header>
+    <Header :title="`Dictionary Entries for &quot;${word}&quot;`"></Header>
+    <template v-for="entry in entries">
+      <DictionaryEntryCard :entry="entry"></DictionaryEntryCard>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
+
+import {
+  DICTIONARY_API_ENDPOINT,
+  type DictionaryEntry,
+} from "@/config/globals";
 
 import ThemeSwitcher from "@/components/ThemeSwitcher.vue";
 import Header from "@/components/Header.vue";
-
-const DICTIONARY_API_ENDPOINT: string =
-  "https://api.dictionaryapi.dev/api/v2/entries/en/";
+import DictionaryEntryCard from "@/components/DictionaryEntryCard.vue";
 
 const route = useRoute();
-const word = ref(route.params.word);
 
-async function getDictionaryEntry() {
-  const response = await fetch(DICTIONARY_API_ENDPOINT);
-  const data = await response.json();
-  if (data && data[0].word) return data;
+const word = ref(route.params.word as string);
+const entries = ref<DictionaryEntry[]>([]);
+
+async function getDictionaryEntry(): Promise<DictionaryEntry[]> {
+  try {
+    const response = await fetch(DICTIONARY_API_ENDPOINT + word.value);
+    const data = await response.json();
+
+    if (data && data[0].word) return data;
+  } catch (_) {}
+
+  return [];
 }
 
-const definitions = getDictionaryEntry();
+// `async` cannot be run at the top-level of the setup, so use `onMounted`
+onMounted(async () => {
+  entries.value = await getDictionaryEntry();
+});
 </script>
 
-<style scoped>
-* {
-  font-family: "Work Sans";
-}
-</style>
+<style scoped></style>
