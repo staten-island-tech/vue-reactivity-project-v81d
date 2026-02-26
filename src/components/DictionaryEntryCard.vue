@@ -66,7 +66,7 @@
 <script setup lang="ts">
 import { type DictionaryEntry } from "@/config/globals";
 
-const props = defineProps<{
+defineProps<{
   entry: DictionaryEntry;
 }>();
 </script>
