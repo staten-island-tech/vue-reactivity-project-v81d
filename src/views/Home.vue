@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref } from "vue";
+import { ref } from "vue";
 
 import {
   DICTIONARY_API_ENDPOINT,
