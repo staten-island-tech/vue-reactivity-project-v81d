@@ -17,7 +17,7 @@
         </p>
       </template>
     </div>
-    <a class="btn-sm-outline" :href="`/definition/${word}`"> See More </a>
+    <RouterLink class="btn-sm-outline" :to="`/definition/${word}`"> See More </RouterLink>
   </article>
 </template>
 
