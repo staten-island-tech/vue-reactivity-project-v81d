@@ -16,7 +16,7 @@ pkgs.mkShell {
 
     i() { npm install "$@"; }
     d() { npm run dev "$@"; }
-    b() { npm build "$@"; }
+    b() { npm run build "$@"; }
 
     export -f i d b
 
