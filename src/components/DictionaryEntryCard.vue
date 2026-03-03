@@ -7,9 +7,10 @@
 
     <!-- The section to show the meanings -->
     <section class="flex flex-col gap-4">
-      <template v-for="meaning in entry.meanings">
+      <template v-for="meaning in entry.meanings" :key="meaning.partOfSpeech">
         <article
           v-for="definition in meaning.definitions"
+          :key="definition.definition"
           class="group/item flex items-center border text-sm rounded-md transition-colors [a]:hover:bg-accent/50 [a]:transition-colors duration-100 flex-wrap outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] border-transparent bg-muted/50 p-4 gap-4"
         >
           <div class="flex flex-1 flex-col gap-1">
@@ -51,7 +52,7 @@
       <ul
         class="list-decimal list-inside pl-4 text-muted-foreground line-clamp-2 text-sm leading-normal font-normal text-balance"
       >
-        <li v-for="url in entry.sourceUrls">
+        <li v-for="url in entry.sourceUrls" :key="url">
           <a
             class="hover:text-primary underline underline-offset-4"
             :href="url"
